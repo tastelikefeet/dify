@@ -1,7 +1,7 @@
 services:
   # The postgres database.
   db:
-    image: postgres:15-alpine
+    image: modelscope-image-registry.cn-wulanchabu.cr.aliyuncs.com/modelscope/mirror:15-alpine
     restart: always
     env_file:
       - ./middleware.env
@@ -27,7 +27,7 @@ services:
 
   # The redis cache.
   redis:
-    image: redis:6-alpine
+    image: modelscope-image-registry.cn-wulanchabu.cr.aliyuncs.com/modelscope/mirror:6-alpine
     restart: always
     volumes:
       # Mount the redis data directory to the container.
@@ -41,7 +41,7 @@ services:
 
   # The DifySandbox
   sandbox:
-    image: langgenius/dify-sandbox:0.2.10
+    image: modelscope-image-registry.cn-wulanchabu.cr.aliyuncs.com/modelscope/mirror:0.2.10
     restart: always
     environment:
       # The DifySandbox configurations
@@ -65,7 +65,7 @@ services:
   # for more information, please refer to
   # https://docs.dify.ai/learn-more/faq/install-faq#id-18.-why-is-ssrf_proxy-needed
   ssrf_proxy:
-    image: ubuntu/squid:latest
+    image: modelscope-image-registry.cn-wulanchabu.cr.aliyuncs.com/modelscope/mirror:latest
     restart: always
     volumes:
       - ./ssrf_proxy/squid.conf.template:/etc/squid/squid.conf.template
@@ -87,7 +87,7 @@ services:
 
   # The Weaviate vector store.
   weaviate:
-    image: semitechnologies/weaviate:1.19.0
+    image: modelscope-image-registry.cn-wulanchabu.cr.aliyuncs.com/modelscope/mirror:1.19.0
     profiles:
       - ""
       - weaviate
