@@ -2,3 +2,8 @@
 in-project = true
 create = true
 prefer-active-python = true
+
+[[tool.poetry.source]]
+name = "tsinghua"
+url = "https://mirrors.aliyun.com/pypi/simple/"
+priority = "primary"
