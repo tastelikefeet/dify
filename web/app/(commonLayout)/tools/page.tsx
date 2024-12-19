@@ -3,10 +3,8 @@ import type { FC } from 'react'
 import { useRouter } from 'next/navigation'
 import { useTranslation } from 'react-i18next'
 import React, { useEffect } from 'react'
-import dynamic from 'next/dynamic'
+import ToolProviderList from '@/app/components/tools/provider-list'
 import { useAppContext } from '@/context/app-context'
-
-const DynamicToolProviderList = dynamic(() => import('@/app/components/tools/provider-list'), { ssr: false })
 
 const Layout: FC = () => {
   const { t } = useTranslation()
@@ -16,15 +14,15 @@ const Layout: FC = () => {
   useEffect(() => {
     if (typeof window !== 'undefined')
       document.title = `${t('tools.title')} - Dify`
-
     if (isCurrentWorkspaceDatasetOperator)
-      router.replace('/datasets')
-  }, [t, isCurrentWorkspaceDatasetOperator, router])
+      return router.replace('/datasets')
+  }, [isCurrentWorkspaceDatasetOperator, router, t])
 
-  if (isCurrentWorkspaceDatasetOperator)
-    return null
+  useEffect(() => {
+    if (isCurrentWorkspaceDatasetOperator)
+      return router.replace('/datasets')
+  }, [isCurrentWorkspaceDatasetOperator, router])
 
-  return <DynamicToolProviderList />
+  return <ToolProviderList />
 }
-
 export default React.memo(Layout)
